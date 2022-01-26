@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -xe
+
+if [ -z "$1" ]; then
+  echo "Usage: $(basename $0) <env>"
+  exit 1
+fi
+
+DEV_ENV="caas-devops-$1"
+CLUSTER=$(gcloud container clusters list | grep "$DEV_ENV" | awk '{print $1}')
+ZONE=$(gcloud container clusters list | grep "$DEV_ENV" | awk '{print $2}')
+echo $CLUSTER, $ZONE
+gcloud container clusters get-credentials $CLUSTER --zone $ZONE
+kubectl get ns

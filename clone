@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [ -z "$1" ]; then
+  echo "Usage: $(basename $0) <repo>"
+  exit 1
+fi
+REPO=$1
+git -C ~/ntti3 clone git@bitbucket.org:ntti3/$REPO.git
+code ~/ntti3/$REPO
+
+
